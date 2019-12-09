@@ -1,0 +1,36 @@
+<table class="table table-bordered table-striped " >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">TAREA</th>
+      <th scope="col">FECHA</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">OBSERVACION</th>
+      <th colspan="2">ACCIONES</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr>
+      {{#each links}} 
+      <td>{{id}}</td>
+      <td>{{nombre}}</td>
+      <td>{{tarea}}</td>
+      <td>{{timeago created_at}}</td>
+      <td>{{estado}}</td>
+      <td>{{observacion}}</td>
+      <td><a href="/links/delete/{{id}}" class="btn btn-danger">Eliminar</a></td>
+      <td><a href="/links/edit/{{id}}" class="btn btn-secondary">Editar</a></td>
+    </tr>
+  </tbody>
+    
+        {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No hay tareas guardadas aún</p>
+                <a href="/links/add">Crea una</a>
+            </div>
+        </div>
+        {{/each}}
+</table>
