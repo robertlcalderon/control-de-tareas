@@ -10,8 +10,6 @@ CREATE TABLE usuario(
 INSERT INTO usuario(id, nombre, password) 
   VALUES (1, 'roberto', '1234');
 
-DESC usuario;
-
 SELECT * FROM usuario;
 
 USE tareasdb;
@@ -24,7 +22,6 @@ CREATE TABLE links (
     asignado VARCHAR(25),
     observacion VARCHAR(60)
 );
-
 
 
 
