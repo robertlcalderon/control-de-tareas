@@ -5,7 +5,7 @@ const pool=require('../database');
 
 
 router.get('/add', (req, res) => {
-  res.render('/links/add');
+  res.render('./links/add');
 });
 
 //AGREGAR TAREA
@@ -28,24 +28,23 @@ router.post('/add', async (req, res) => {
 
 router.get('/list', async (req, res) => {
   const links=await pool.query('SELECT * FROM links')
-  res.render('/links/list', {links});
+  res.render('./links/list', {links});
 });
 
 
 //eliminar tarea
 router.get('/delete/:id', async(req, res) => {
-  const {id}= req.params;
-  pool.query('DELETE FROM links WHERE ID = ?', [id]);
+  const { id }= req.params;
+  await pool.query('DELETE FROM links WHERE ID = ?', [id]);
   req.flash('success','Tarea Removida');
   res.redirect('/links/list')
 });
 
 //editar tarea
-router.get('/edit:id', async (req, res) => {
+router.get('/edit/:id', async (req, res) => {
   const { id } = req.params;
-  const link = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
-  console.log(link);
-  res.render('/links/edit', {link: link[0]});
+  const links = await pool.query('SELECT * FROM links WHERE ID = ?', [id]);
+  res.render('./links/edit', {link: links[0]});
 });
 
 router.post('/edit/:id', async (req, res) => {
@@ -60,7 +59,7 @@ router.post('/edit/:id', async (req, res) => {
   };
   await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
   req.flash('success', 'La tarea a sido actualizada');
-  res.redirect('/links');
+  res.redirect('/');
 });
 
 module.exports= router;
